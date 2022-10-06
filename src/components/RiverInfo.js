@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { getRiverInformation } from "../services/rivers";
+import PropTypes from "prop-types";
 
-export default function RiverInfo() {
+export default function RiverInfo(props) {
   const [riverInformation, setRiverInformation] = useState({});
 
   useEffect(() => {
-    getRiverInformation().then((data) => setRiverInformation(data));
-  }, []);
+    getRiverInformation(props.name).then((data) => setRiverInformation(data));
+  }, [props.name]);
   return (
     <div>
       <h2>River Information</h2>
@@ -18,3 +19,5 @@ export default function RiverInfo() {
     </div>
   );
 }
+
+RiverInfo.propTypes = { name: PropTypes.string.isRequired };
