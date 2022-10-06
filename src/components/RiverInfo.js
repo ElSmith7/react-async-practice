@@ -3,7 +3,7 @@ import { getRiverInformation } from "../services/rivers";
 import PropTypes from "prop-types";
 
 export default function RiverInfo(props) {
-  const [riverInformation, setRiverInformation] = useState({});
+  const [riverInformation, setRiverInformation] = useState();
 
   useEffect(() => {
     getRiverInformation(props.name).then((data) => setRiverInformation(data));
@@ -12,9 +12,9 @@ export default function RiverInfo(props) {
     <div>
       <h2>River Information</h2>
       <ul>
-        <li>Continent: {riverInformation.continent}</li>
-        <li>Length: {riverInformation.length}</li>
-        <li>Outflow: {riverInformation.outflow}</li>
+        <li>Continent: {riverInformation?.continent}</li>
+        <li>Length: {riverInformation?.length}</li>
+        <li>Outflow: {riverInformation?.outflow}</li>
       </ul>
     </div>
   );
