@@ -6,8 +6,17 @@ export default function RiverInfo(props) {
   const [riverInformation, setRiverInformation] = useState();
 
   useEffect(() => {
-    getRiverInformation(props.name).then((data) => setRiverInformation(data));
+    let mounted = true;
+    getRiverInformation(props.name).then((data) => {
+      if (mounted) {
+        setRiverInformation(data);
+      }
+    });
+    return () => {
+      mounted = false;
+    };
   }, [props.name]);
+
   return (
     <div>
       <h2>River Information</h2>
