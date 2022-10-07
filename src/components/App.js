@@ -1,6 +1,9 @@
-import React, { useReducer, useState } from "react";
+import React, { lazy, Suspense, useReducer, useState } from "react";
 import "./App.css";
-import RiverInfo from "./RiverInfo";
+
+const RiverInfo = lazy(() =>
+  import(/* webpackChunkName: "RiverInformation" */ "./RiverInfo")
+);
 
 function App() {
   const [river, setRiver] = useState(`nile`);
@@ -16,7 +19,9 @@ function App() {
       <button onClick={() => setRiver("amazon")}>Amazon</button>
       <button onClick={() => setRiver("yangtze")}>Yangtze</button>
       <button onClick={() => setRiver("mississippi")}>Mississippi</button>
-      {show && <RiverInfo name={river} />}
+      <Suspense fallback={<div>loading component</div>}>
+        {show && <RiverInfo name={river} />}
+      </Suspense>
     </div>
   );
 }
